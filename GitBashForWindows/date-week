@@ -1,0 +1,47 @@
+#!/usr/bin/env python
+
+"""
+takes date from user and
+returns:
+- what number week of the year
+- Day of week (e.g. Sunday, Monday, Tuesday, ...)
+- what number day of the year
+"""
+
+import sys
+import re
+from datetime import date  # ISO 8601 Standard
+
+
+def main(y, m, d):
+    """output requested info"""
+    day_obj = date(y, m, d)  # convert user_date to datetime value
+
+    # %U ► week number of year, with Sunday as first day of week (00..53)
+    week_num = day_obj.strftime("%U")
+    day_of_wk = day_obj.strftime("%A")
+    day_of_year = day_obj.strftime("%j")
+
+    print(f"Week Num  : {int(week_num) + 1}")
+    print(f"Day of Wk : {day_of_wk}")
+    print(f"Day of Yr : {day_of_year}")
+
+
+if __name__ == "__main__":
+    # Create a regex pattern to split out
+    # the three values in the user input whether
+    # user uses ".", "-", or "/" as delimiter of
+    # three values
+    delimiters = ".", "-", "/"  # it's a tuple!
+    REGEX_PATTERN = "|".join(map(re.escape, delimiters))
+
+    if len(sys.argv) == 1:
+        given_day = str(date.today())
+        print("\nNo date given.")
+        print(f"Using today's date: {given_day}.\n")
+    else:
+        given_day = sys.argv[1]
+
+    arg = re.split(REGEX_PATTERN, given_day)
+    year, month, day = list(map(int, arg))
+    main(year, month, day)

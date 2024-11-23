@@ -22,6 +22,7 @@ def main(y, m, d):
     day_of_wk = day_obj.strftime("%A")
     day_of_year = day_obj.strftime("%j")
 
+    print(f"Date      : {y}-{m:0>2}-{d:0>2}")
     print(f"Week Num  : {int(week_num) + 1}")
     print(f"Day of Wk : {day_of_wk}")
     print(f"Day of Yr : {day_of_year}")
@@ -37,8 +38,8 @@ if __name__ == "__main__":
 
     if len(sys.argv) == 1:
         given_day = str(date.today())
-        print("\nNo date given.")
-        print(f"Using today's date: {given_day}.\n")
+        # print("\nNo date given.")
+        # print(f"Using today's date: {given_day}.\n")
     else:
         given_day = sys.argv[1]
 

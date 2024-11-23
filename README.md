@@ -1,0 +1,2 @@
+# myBinFolders
+Executables I use
